@@ -1,0 +1,14 @@
+
+<form [formGroup]="conversionForm" (ngSubmit)="addNewConvert()">
+  <mat-form-field>
+    <mat-label for="amount" aria-describedby="Form for entering the amount to be converted">Conversion Amount</mat-label>
+    <input matInput formControlName="calculatedAmount" placeholder="Amount to convert">
+    <mat-error *ngIf="conversionForm.controls['calculatedAmount']?.hasError('required')">
+      This field is required.
+    </mat-error>
+  </mat-form-field>
+
+  <div>
+    <button mat-flat-button type="submit" color="primary" aria-label="Convert selected currencies">Conversion</button>
+  </div>
+</form>

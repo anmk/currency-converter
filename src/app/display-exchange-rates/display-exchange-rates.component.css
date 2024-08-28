@@ -1,0 +1,33 @@
+
+th {
+  text-align: left;
+}
+
+th, td {
+  width: 33%;
+  max-width: 15rem;
+}
+
+hr {
+  margin: 2px -5px 2px -5px;
+}
+
+table {
+  width: 100%;
+  max-width: 80rem;
+}
+
+span {
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
+.wrapper { 
+  display: flex; 
+  justify-content: center; 
+  margin: 5px;
+}
