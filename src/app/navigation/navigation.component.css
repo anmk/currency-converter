@@ -10,7 +10,7 @@ button {
   flex: 1 1 0%;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 510px) {
   .toolbar-title {
     display: none;
   }
