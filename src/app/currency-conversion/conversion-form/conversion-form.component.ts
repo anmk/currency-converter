@@ -20,13 +20,13 @@ export class ConversionFormComponent {
     this.buildOrderForm();
   }
 
-  private buildOrderForm() {
+  private buildOrderForm(): FormGroup {
    return this.conversionForm = this.formBuilder.group({
     calculatedAmount: [null, [Validators.required]],
     });
   }
 
-  addNewConvert() {
+  addNewConvert(): void {
     this.addOrder.emit(+this.conversionForm.value.calculatedAmount);
   }
 

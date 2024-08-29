@@ -28,13 +28,13 @@ export class SelectExchangeRateDateComponent implements OnInit, OnDestroy {
     this.getFormValues();
   }
 
-  dateForm(): void {
-    this.dateFormGroup = new FormGroup({
-      rateDate: new FormControl('', Validators.required),
+  dateForm(): FormGroup {
+    return this.dateFormGroup = new FormGroup({
+      rateDate: new FormControl('', Validators.required)
     });
   }
 
-  transformDate(date: Date) {
+  transformDate(date: Date): void {
     this.rateDate = this.datepipe.transform(date, 'yyyy-MM-dd');
   }
 

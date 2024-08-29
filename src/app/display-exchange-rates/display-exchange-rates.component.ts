@@ -27,24 +27,24 @@ export class DisplayExchangeRatesComponent implements OnInit {
     this.getCurrencyData();
   }
 
-  transformDate(date: Date) {
+  transformDate(date: Date): void {
     this.currentDate = this.datepipe.transform(date, 'yyyy-MM-dd');
   }
 
-  getCurrencyData() {
+  getCurrencyData(): void {
     this.displayDate = '';
     const date = new Date();
     this.transformDate(date);
     this.getData(this.currentDate);
   }
 
-  getPastData() {
+  getPastData(): void {
     this.displayDate = '';
     this.getData(this.pastDate);
     this.currencyData = [];
   }
 
-  getData(date: string | null) {
+  getData(date: string | null): void {
     if (date) {
       this.subscription = this.currencyDataService.get_currencies(date)
       .pipe(

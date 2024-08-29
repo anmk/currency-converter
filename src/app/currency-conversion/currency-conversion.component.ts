@@ -36,11 +36,11 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
     this.getFormValues();
   }
 
-  transformDate(date: Date) {
+  transformDate(date: Date): void {
     this.currentRateDate = this.datepipe.transform(date, 'yyyy-MM-dd');
   }
 
-  getData() {
+  getData(): void {
     const date = new Date();
     this.transformDate(date);
     if(this.currentRateDate){
@@ -54,10 +54,10 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
     }
   }
 
-  currencyForm(): void {
-    this.currencyFormGroup = new FormGroup({
+  currencyForm(): FormGroup {
+    return this.currencyFormGroup = new FormGroup({
       fromCurrency: new FormControl('', Validators.required),
-      toCurrency: new FormControl('', Validators.required),
+      toCurrency: new FormControl('', Validators.required)
     });
   }
 
