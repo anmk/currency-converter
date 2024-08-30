@@ -8,8 +8,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   selector: 'app-navigation',
   standalone: true,
   imports: [ RouterOutlet, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule, MatIconModule ],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.css'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
 export class NavigationComponent {
 

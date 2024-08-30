@@ -2,18 +2,13 @@ th {
   text-align: left;
 }
 
-th, td {
-  width: 33%;
-  max-width: 15rem;
-}
-
 hr {
   margin: 2px -5px 2px -5px;
 }
 
 table {
   width: 100%;
-  max-width: 80rem;
+  max-width: 70rem;
 }
 
 span {
@@ -28,4 +23,29 @@ span {
   display: flex; 
   justify-content: center; 
   margin: 5px;
+}
+
+@media screen and (max-width: 649px) {
+  .left-column {
+    width: 50%;
+    max-width: 15rem;
+  }
+  .center-column {
+    width: 19%;
+  }
+  .right-column {
+    width: 31%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .left-column {
+    width: 65%;
+  }
+  .center-column {
+    width: 20%;
+  }
+  .right-column {
+    width: 15%;
+  }
 }

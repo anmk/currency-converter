@@ -1,72 +1,74 @@
-<ng-container *ngIf="currencyData && currencyData[0]?.rates.length; else info">
-  <div class="top-container">
-    <h1 class="element-item">Currency conversion</h1> 
-    <h4 aria-label="Display of the currency rate date" class="element-item">Date of downloaded data: {{currentRateDate}}</h4> 
-  </div>
+<article>
+  <ng-container *ngIf="currencyData && currencyData[0]?.rates.length; else info">
+    <section class="top-container">
+      <h1 class="element-item">Currency conversion</h1> 
+      <h4 aria-label="Display of the currency rate date" class="element-item">Date of downloaded data: {{currentRateDate}}</h4> 
+    </section>
 
-  <section class="select-container">
+    <section class="select-container">
+      <div class="element-item">
+          <p>Convert the amount from currency</p>
+
+          <mat-form-field [formGroup]="currencyFormGroup">
+            <mat-label for="currency" aria-describedby="Selecting the currency to be converted">Select currency</mat-label>
+            <mat-select formControlName="fromCurrency" placeholder="Select">
+              <mat-option>None</mat-option>
+              <ng-container *ngIf="currencyData && currencyData[0]?.rates.length > 0">
+                @for (rate of currencyData[0].rates; track rate?.code) {
+                  <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
+                }
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="currencyFormGroup.controls['fromCurrency']?.hasError('required')">
+              This field is required.
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+      <div class="element-item">
+          <p>Convert amount to currency</p>
+
+          <mat-form-field [formGroup]="currencyFormGroup">
+            <mat-label for="currency" aria-describedby="Selecting the target currency">Select currency</mat-label>
+            <mat-select formControlName="toCurrency">
+              <mat-option>None</mat-option>
+              <ng-container *ngIf="currencyData && currencyData[0]?.rates.length > 0">
+                @for (rate of currencyData[0].rates; track rate?.code) {
+                  <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
+                }
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="currencyFormGroup.controls['toCurrency']?.hasError('required')">
+              This field is required.
+            </mat-error>
+          </mat-form-field>
+      </div>
+    </section>
+
+    <section class="form-container">
+      <div class="element-item">
+        <p>Enter the amount you want to convert</p>
+      </div>
+      
+      <div class="element-item">
+        <app-conversion-form 
+          aria-describedby="Form field for entering the amount to be converted" 
+          (addOrder)="addOrder($event)"
+        ></app-conversion-form>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-template #info class="form-container">
     <div class="element-item">
-        <p>Convert the amount from currency</p>
-
-        <mat-form-field [formGroup]="currencyFormGroup">
-          <mat-label for="currency" aria-describedby="Selecting the currency to be converted">Select currency</mat-label>
-          <mat-select formControlName="fromCurrency" placeholder="Select">
-            <mat-option>None</mat-option>
-            <ng-container *ngIf="currencyData && currencyData[0]?.rates.length > 0">
-              @for (rate of currencyData[0].rates; track rate?.code) {
-                <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
-              }
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="currencyFormGroup.controls['fromCurrency']?.hasError('required')">
-            This field is required.
-          </mat-error>
-        </mat-form-field>
+      <h3>Today's data is not available.</h3>
     </div>
+  </ng-template>
 
-    <div class="element-item">
-        <p>Convert amount to currency</p>
-
-        <mat-form-field [formGroup]="currencyFormGroup">
-          <mat-label for="currency" aria-describedby="Selecting the target currency">Select currency</mat-label>
-          <mat-select formControlName="toCurrency">
-            <mat-option>None</mat-option>
-            <ng-container *ngIf="currencyData && currencyData[0]?.rates.length > 0">
-              @for (rate of currencyData[0].rates; track rate?.code) {
-                <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
-              }
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="currencyFormGroup.controls['toCurrency']?.hasError('required')">
-            This field is required.
-          </mat-error>
-        </mat-form-field>
-    </div>
-  </section>
-
-  <section class="form-container">
-    <div class="element-item">
-      <p>Enter the amount you want to convert</p>
-    </div>
-    
-    <div class="element-item">
-      <app-conversion-form 
-        aria-describedby="Form field for entering the amount to be converted" 
-        (addOrder)="addOrder($event)"
-      ></app-conversion-form>
-    </div>
-  </section>
-</ng-container>
-
-<ng-template #info class="form-container">
-  <div class="element-item">
-    <h3>Today's data is not available.</h3>
-  </div>
-</ng-template>
-
-<ng-container *ngIf="convertedAmount" class="form-container">
-  <div class="element-item">
-    <p>After conversion, the value in the selected currency is:</p>
-    <h3 aria-label="Conversion result of selected currencies">{{convertedAmount}}</h3>
-  </div>
-</ng-container>
+  <ng-container *ngIf="convertedAmount" class="form-container">
+    <section class="element-item">
+      <p>After conversion, the value in the selected currency is:</p>
+      <h3 aria-label="Conversion result of selected currencies">{{convertedAmount}}</h3>
+    </section>
+  </ng-container>
+</article>

@@ -1,42 +1,44 @@
-<section class="wrapper">
-  <h1>The application allows you to display and convert currency rates.</h1>
-</section>
+<article>
+  <div class="wrapper">
+    <h1>The application allows you to display and convert currency rates.</h1>
+  </div>
 
-<app-select-exchange-rate-date
-  (shownDate)="onShownDate($event)" aria-label="Currency rates date selection"
-></app-select-exchange-rate-date>
+  <app-select-exchange-rate-date
+    (shownDate)="onShownDate($event)" aria-label="Currency rates date selection"
+  ></app-select-exchange-rate-date>
 
-<section class="wrapper">
-  <h2 *ngIf="displayDate">
-    Table of average exchange rates according to the National Bank of Poland from: {{displayDate}}. You can choose another date from the datepicker above.
-  </h2>
-</section>
+  <div class="wrapper">
+    <h2 *ngIf="displayDate">
+      Table of average exchange rates according to the National Bank of Poland from: {{displayDate}}. You can choose another date from the datepicker above.
+    </h2>
+  </div>
 
-<ng-container aria-describedby="Displaying exchange rates" *ngIf="currencyData && currencyData[0]?.rates.length; else info">
-  <section class="wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Currency</th>
-          <th>Code</th>
-          <th>Average rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(rate of currencyData[0].rates; track rate?.code) {
+  <ng-container aria-describedby="Displaying exchange rates" *ngIf="currencyData && currencyData[0]?.rates.length; else info">
+    <section class="wrapper">
+      <table>
+        <thead>
           <tr>
-            <td><hr><span>{{ rate?.currency }}</span></td>
-            <td><hr>{{ rate?.code }}</td>
-            <td><hr>{{ rate?.mid }}</td>
+            <th class="left-column">Currency</th>
+            <th class="center-column">Code</th>
+            <th class="right-column">Average rate</th>
           </tr>
-        }
-      </tbody>
-    </table>
-  </section>
-</ng-container>
-  
-<ng-template #info>
-  <section class="wrapper">
-    <h3>The data is not available. If you want to check the archived data, select the date with the datepicker.</h3>
-  </section>
-</ng-template>
+        </thead>
+        <tbody>
+          @for(rate of currencyData[0].rates; track rate?.code) {
+            <tr>
+              <td class="left-column"><hr><span>{{ rate?.currency }}</span></td>
+              <td class="center-column"><hr>{{ rate?.code }}</td>
+              <td class="right-column"><hr>{{ rate?.mid }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  </ng-container>
+    
+  <ng-template #info>
+    <div class="wrapper">
+      <h3>The data is not available. If you want to check the archived data, select the date with the datepicker.</h3>
+    </div>
+  </ng-template>
+</article>
