@@ -1,7 +1,9 @@
+import { Rate } from "./rate.model";
+
 export interface CurrencyData {
-  Array: [number, {}];
   effectiveDate: string;
   no: string;
-  rates: any;
+  rates: Rate[];
   table: string;
 }
+

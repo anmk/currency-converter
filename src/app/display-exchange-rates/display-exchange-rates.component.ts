@@ -18,7 +18,7 @@ export class DisplayExchangeRatesComponent implements OnInit {
   currentDate!: string | null
   pastDate!: string;
   displayDate!: string | null;
-  currencyData!: Array<CurrencyData>;
+  currencyData!: CurrencyData[];
   subscription!: Subscription;
   private currencyDataService = inject(CurrencyDataService);
   private readonly datepipe = inject(DatePipe);
@@ -29,6 +29,10 @@ export class DisplayExchangeRatesComponent implements OnInit {
 
   transformDate(date: Date): void {
     this.currentDate = this.datepipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  transformDateToDisplay(date: string): void {
+    this.displayDate = this.datepipe.transform(date, 'dd/MM/yyyy');
   }
 
   getCurrencyData(): void {
@@ -52,7 +56,7 @@ export class DisplayExchangeRatesComponent implements OnInit {
         catchError(() => []))
         .subscribe((res: any) => {
           this.currencyData = res;
-          this.displayDate = date;
+          this.transformDateToDisplay(date);
       });
     }
   }

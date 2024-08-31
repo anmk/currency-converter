@@ -8,12 +8,12 @@
   ></app-select-exchange-rate-date>
 
   <div class="wrapper">
-    <h2 *ngIf="displayDate">
+    <h4 *ngIf="displayDate">
       Table of average exchange rates according to the National Bank of Poland from: {{displayDate}}. You can choose another date from the datepicker above.
-    </h2>
+    </h4>
   </div>
 
-  <ng-container aria-describedby="Displaying exchange rates" *ngIf="currencyData && currencyData[0]?.rates.length; else info">
+  <ng-container aria-describedby="Displaying exchange rates" *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
     <section class="wrapper">
       <table>
         <thead>

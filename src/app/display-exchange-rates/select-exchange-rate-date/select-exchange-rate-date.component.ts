@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-select-exchange-rate-date',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, ReactiveFormsModule],
-  providers: [provideNativeDateAdapter(), DatePipe],
+  providers: [provideNativeDateAdapter(), DatePipe, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }], // You can change the locale, e.g. to 'pl-PL' or another.
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-exchange-rate-date.component.html',
   styleUrl: './select-exchange-rate-date.component.css'

@@ -19,8 +19,9 @@ import { CurrencyData } from '../models/currency-data.model';
   styleUrl: './currency-conversion.component.css',
 })
 export class CurrencyConversionComponent implements OnInit, OnDestroy {
-  currencyData!: Array<CurrencyData>;
+  currencyData!: CurrencyData[];
   currentRateDate!: string | null;
+  displayRateDate!: string | null;
   currencyFormGroup!: FormGroup;
   convertedAmount!: number;
   private convertFromCurrency!: number;
@@ -40,9 +41,14 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
     this.currentRateDate = this.datepipe.transform(date, 'yyyy-MM-dd');
   }
 
+  transformDateToDisplay(date: Date): void {
+    this.displayRateDate = this.datepipe.transform(date, 'dd/MM/yyyy');
+  }
+
   getData(): void {
     const date = new Date();
     this.transformDate(date);
+    this.transformDateToDisplay(date);
     if(this.currentRateDate){
       this.currencyDataService.get_currencies(this.currentRateDate)
       .pipe(

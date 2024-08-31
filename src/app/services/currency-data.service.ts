@@ -14,9 +14,9 @@ export class CurrencyDataService {
   constructor(private httpClient: HttpClient) {}
 
   get_currencies(date: string): Observable<Object> {
-    return this.httpClient.get<Array<CurrencyData>>(this.baseUrl + date).pipe(
+    return this.httpClient.get<CurrencyData[]>(this.baseUrl + date).pipe(
       tap({
-        error: e => console.log(e),
+        error: e => console.log(e)
       }),
     )
   }
