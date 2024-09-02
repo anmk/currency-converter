@@ -6,6 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subject, takeUntil } from 'rxjs';
+import { CurrencyDataService } from '../../services/currency-data.service';
 
 @Component({
   selector: 'app-select-exchange-rate-date',
@@ -21,7 +22,7 @@ export class SelectExchangeRateDateComponent implements OnInit, OnDestroy {
   dateFormGroup!: FormGroup;
   public rateDate!: string | null;
   private destroy$ = new Subject<void>();
-  private readonly datepipe = inject(DatePipe);
+  private currencyDataService = inject(CurrencyDataService);
 
   ngOnInit() {
     this.dateForm();
@@ -34,16 +35,12 @@ export class SelectExchangeRateDateComponent implements OnInit, OnDestroy {
     });
   }
 
-  transformDate(date: Date): void {
-    this.rateDate = this.datepipe.transform(date, 'yyyy-MM-dd');
-  }
-
   getFormValues(): void {
     this.dateFormGroup.controls['rateDate']
     .valueChanges
     .pipe(takeUntil(this.destroy$))
     .subscribe(value => {
-      this.transformDate(value)
+      this.rateDate = this.currencyDataService.transformDate(value);
       this.showDate();
     });
   }

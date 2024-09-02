@@ -1,17 +1,17 @@
 <article>
   <div class="wrapper">
-    <h1>The application allows you to display and convert currency rates.</h1>
+    <h1 class="title">The application allows you to display and convert currency rates.</h1>
+  </div>
+
+  <div class="wrapper">
+    <h4 *ngIf="displayDate"class="date-info">
+      Table of average exchange rates according to the National Bank of Poland from: {{displayDate}}. You can choose another date from the datepicker below.
+    </h4>
   </div>
 
   <app-select-exchange-rate-date
     (shownDate)="onShownDate($event)" aria-label="Currency rates date selection"
   ></app-select-exchange-rate-date>
-
-  <div class="wrapper">
-    <h4 *ngIf="displayDate">
-      Table of average exchange rates according to the National Bank of Poland from: {{displayDate}}. You can choose another date from the datepicker above.
-    </h4>
-  </div>
 
   <ng-container aria-describedby="Displaying exchange rates" *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
     <section class="wrapper">

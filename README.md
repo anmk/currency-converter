@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
 
+The application is available at the following addresses:
+
+* https://display-and-convert-currencies.web.app
+
+* https://display-and-convert-currencies.firebaseapp.com
+
+## Introduction
+
+Currency Converter allows you to learn about current and archived average exchange rates. The application also allows you to convert current exchange rates. This project uses table A from the National Bank of Poland API. 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

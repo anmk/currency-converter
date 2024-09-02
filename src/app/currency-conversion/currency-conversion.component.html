@@ -1,10 +1,18 @@
 <article>
-  <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
-    <section class="top-container">
-      <h1 class="element-item">Currency conversion</h1> 
-      <h4 aria-label="Display of the currency rate date" class="element-item">Date of downloaded data: {{displayRateDate}}</h4> 
-    </section>
+  <section class="top-container">
+    <h1 class="element-item title">Currency conversion</h1>
+    <h4 
+      *ngIf="displayRateDate" 
+      aria-label="Display of the currency rate date" 
+      class="element-item date-info">Date of downloaded data: {{displayRateDate}}. You can select a different date from the datepicker below.
+    </h4> 
+  </section> 
 
+  <app-select-exchange-rate-date
+    (shownDate)="onShownDate($event)" aria-label="Currency rates date selection"
+  ></app-select-exchange-rate-date> 
+
+  <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
     <section class="select-container">
       <div class="element-item">
           <p>Convert the amount from currency</p>
@@ -62,7 +70,7 @@
 
   <ng-template #info class="form-container">
     <div class="element-item">
-      <h3>Today's data is not available.</h3>
+      <h3>Data is not available. If you want to check data from another day, select other date using the date selector.</h3>
     </div>
   </ng-template>
 

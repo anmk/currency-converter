@@ -35,3 +35,11 @@ h4, h5, p {
   display: flex;
   padding: 2rem;
 }
+
+.title {
+  margin-bottom: 5px;
+}
+
+.date-info {
+  margin-top: 5px;
+}

@@ -7,7 +7,7 @@
 .form-container, .top-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .element-item {

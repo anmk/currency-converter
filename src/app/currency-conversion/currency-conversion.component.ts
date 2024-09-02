@@ -3,18 +3,18 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Subject, catchError, first, takeUntil } from 'rxjs';
 
 import { CurrencyDataService } from '../services/currency-data.service';
 import { ConversionFormComponent } from './conversion-form/conversion-form.component';
 import { CurrencyData } from '../models/currency-data.model';
+import { SelectExchangeRateDateComponent } from '../shared/select-exchange-rate-date/select-exchange-rate-date.component';
 
 @Component({
   selector: 'app-currency-conversion',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, ConversionFormComponent],
-  providers: [DatePipe],
+  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, ConversionFormComponent, SelectExchangeRateDateComponent],
   templateUrl: './currency-conversion.component.html',
   styleUrl: './currency-conversion.component.css',
 })
@@ -24,40 +24,38 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
   displayRateDate!: string | null;
   currencyFormGroup!: FormGroup;
   convertedAmount!: number;
+  pastDate!: string;
   private convertFromCurrency!: number;
   private convertToCurrency!: number;
   private calculatedAmount!: number;
   private destroy$ = new Subject<void>();
   private currencyDataService = inject(CurrencyDataService);
-  private readonly datepipe = inject(DatePipe);
 
   ngOnInit() {
-    this.getData();
+    this.getCurrencyData()
     this.currencyForm();
     this.getFormValues();
   }
 
-  transformDate(date: Date): void {
-    this.currentRateDate = this.datepipe.transform(date, 'yyyy-MM-dd');
-  }
-
-  transformDateToDisplay(date: Date): void {
-    this.displayRateDate = this.datepipe.transform(date, 'dd/MM/yyyy');
-  }
-
-  getData(): void {
+  getCurrencyData(): void {
+    this.displayRateDate = '';
     const date = new Date();
-    this.transformDate(date);
-    this.transformDateToDisplay(date);
-    if(this.currentRateDate){
-      this.currencyDataService.get_currencies(this.currentRateDate)
+    this.currentRateDate = this.currencyDataService.transformDate(date);
+    this.getData(this.currentRateDate);
+  }
+
+  getData(date: string | null): void {
+    if (date) {
+      this.currencyDataService.getCurrencies(date)
       .pipe(
         first(),
-        catchError(() => [])
-      ).subscribe((res: any) => {
-        this.currencyData = res;
+        catchError(() => []))
+        .subscribe((res: any) => {
+          this.currencyData = res;
+          this.displayRateDate = this.currencyDataService.transformDateToDisplay(date);
       });
     }
+    this.currencyData = [];
   }
 
   currencyForm(): FormGroup {
@@ -102,6 +100,13 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
   addOrder(amount: any): void {
    this.calculatedAmount = amount;
    this.convertingAmounts();
+  }
+
+  onShownDate(date: string): void {
+    this.pastDate = date;
+    this.displayRateDate = date;
+    this.getData(date);
+    this.convertedAmount = 0;
   }
 
   ngOnDestroy(): void {
