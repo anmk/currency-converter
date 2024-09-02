@@ -10,7 +10,7 @@ The application is available at the following addresses:
 
 ## Introduction
 
-Currency Converter allows you to learn about current and archived average exchange rates. The application also allows you to convert current exchange rates. This project uses table A from the National Bank of Poland API. 
+Currency Converter allows you to learn about current and archived average exchange rates. The application also allows you to convert this rates. This project uses table A from the National Bank of Poland API. 
 
 ## Development server
 
