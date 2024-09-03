@@ -104,7 +104,6 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
 
   onShownDate(date: string): void {
     this.pastDate = date;
-    this.displayRateDate = date;
     this.getData(date);
     this.convertedAmount = 0;
   }
