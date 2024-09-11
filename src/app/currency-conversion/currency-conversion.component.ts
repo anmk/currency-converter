@@ -10,11 +10,12 @@ import { CurrencyDataService } from '../services/currency-data.service';
 import { ConversionFormComponent } from './conversion-form/conversion-form.component';
 import { CurrencyData } from '../models/currency-data.model';
 import { SelectExchangeRateDateComponent } from '../shared/select-exchange-rate-date/select-exchange-rate-date.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-currency-conversion',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, ConversionFormComponent, SelectExchangeRateDateComponent],
+  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, ReactiveFormsModule, ConversionFormComponent, SelectExchangeRateDateComponent],
   templateUrl: './currency-conversion.component.html',
   styleUrl: './currency-conversion.component.css',
 })
@@ -25,6 +26,7 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
   currencyFormGroup!: FormGroup;
   convertedAmount!: number;
   pastDate!: string;
+  displayedCodes = false;
   private convertFromCurrency!: number;
   private convertToCurrency!: number;
   private calculatedAmount!: number;
@@ -106,6 +108,10 @@ export class CurrencyConversionComponent implements OnInit, OnDestroy {
     this.pastDate = date;
     this.getData(date);
     this.convertedAmount = 0;
+  }
+
+  toggleCurrencyList(): void {
+    this.displayedCodes = !this.displayedCodes;
   }
 
   ngOnDestroy(): void {

@@ -13,18 +13,30 @@
   ></app-select-exchange-rate-date> 
 
   <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
+    <section class="top-container">
+      <div class="element-item title">
+        <p>The datepicker uses the currency {{ !displayedCodes ? 'names' : 'codes' }}, switch it to</p>
+        <button 
+          mat-flat-button color="primary" 
+          (click)="toggleCurrencyList()" 
+          class="title" 
+          aria-label="Change datepicker view to currency description or code">
+          currency {{ displayedCodes ? 'names' : 'codes' }}
+        </button>
+      </div>
+    </section>
+
     <section class="select-container">
-      <div class="element-item">
+      <div class="element-item date-info">
           <p>Convert the amount from currency</p>
 
           <mat-form-field [formGroup]="currencyFormGroup">
             <mat-label for="currency" aria-describedby="Selecting the currency to be converted">Select currency</mat-label>
             <mat-select formControlName="fromCurrency" placeholder="Select">
               <mat-option>None</mat-option>
-            
                 <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length">
                 @for (rate of currencyData[0].rates; track rate?.code) {
-                  <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
+                  <mat-option [value]="rate?.mid">{{displayedCodes ? rate?.code : rate?.currency}}</mat-option>
                 }
               </ng-container>
             </mat-select>
@@ -43,7 +55,7 @@
               <mat-option>None</mat-option>
               <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length">
                 @for (rate of currencyData[0].rates; track rate?.code) {
-                  <mat-option [value]="rate?.mid">{{rate?.currency}}</mat-option>
+                  <mat-option [value]="rate?.mid">{{displayedCodes ? rate?.code : rate?.currency}}</mat-option>
                 }
               </ng-container>
             </mat-select>
