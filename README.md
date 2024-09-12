@@ -3,9 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
 
 The application is available at the following addresses:
-
 * https://display-and-convert-currencies.web.app
-
 * https://display-and-convert-currencies.firebaseapp.com
 
 ## Introduction

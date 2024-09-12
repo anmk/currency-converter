@@ -15,7 +15,7 @@
   <ng-container *ngIf="currencyData && currencyData[0]?.rates?.length; else info">
     <section class="top-container">
       <div class="element-item title">
-        <p>The datepicker uses the currency {{ !displayedCodes ? 'names' : 'codes' }}, switch it to</p>
+        <p>Datepickers display currency {{ !displayedCodes ? 'names' : 'codes' }}, switch them to</p>
         <button 
           mat-flat-button color="primary" 
           (click)="toggleCurrencyList()" 
