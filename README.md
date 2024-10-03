@@ -1,6 +1,8 @@
 # Currency Converter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
+
+![version](https://img.shields.io/badge/angular%20cli%20version-18.2.1-blue?style=plastic)
 
 The application is available at the following addresses:
 * https://display-and-convert-currencies.web.app
