@@ -1,7 +1,7 @@
 # Currency Converter
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-![version](https://img.shields.io/badge/angular%20cli%20version-18.2.1-blue?style=plastic)
+![version](https://img.shields.io/badge/angular%20cli%20version-18.2.1-blue?style=plastic) ![GitHub repo size](https://img.shields.io/github/repo-size/anmk/currency-converter?style=plastic)
 
 The application is available at the following addresses:
 * https://display-and-convert-currencies.web.app
@@ -29,7 +29,7 @@ Currency Converter uses the following open source projects for proper operation:
 * [Angular Material](https://material.angular.io)
 * [TypeScript](https://github.com/microsoft/TypeScript)
 * [RxJS](https://github.com/ReactiveX/rxjs)
-* [node.js](https://nodejs.org/en/)
+* [Node.js](https://nodejs.org/en/)
 * [CSS](https://www.w3.org/TR/css3-roadmap/)
 * [CSS Flexbox](https://www.w3.org/TR/css-flexbox-1/)
 * [REST](https://developer.mozilla.org/en-US/docs/Glossary/REST)
